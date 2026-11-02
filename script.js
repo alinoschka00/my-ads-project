@@ -5,7 +5,7 @@
 // Массив объявлений (имитация таблицы в БД)
 const allItems = [
     { id: 1, title: 'Дракон, Рэйвен', price: '3 590 ₽', img: 'img/dragon_passport.jpg.png', author: 'Иван', phone: '+7 (999) 111-22-33' },
-    { id: 2, title: 'Толстовка "Распашовка"', price: '4 900 ₽', img: 'img/black_hoodie.jpg.png', author: 'Иван', phone: '+7 (999) 111-22-33' },
+    { id: 2, title: 'Толстовка "Распальцоыка"', price: '4 900 ₽', img: 'img/black_hoodie.jpg.png', author: 'Иван', phone: '+7 (999) 111-22-33' },
     { id: 3, title: 'Механические часы Победа - ИГ 2', price: '12 000 ₽', img: 'img/watch.jpg.png', author: 'Иван', phone: '+7 (999) 111-22-33' },
     { id: 4, title: 'iPhone 13 512GB', price: '79 990 ₽', img: 'img/iphone_blue.jpg.png', author: 'Петр', phone: '+7 (999) 444-55-66' },
     { id: 5, title: 'ТВ Тумба Друо', price: '67 850 ₽', img: 'img/tv_stand.jpg.png', author: 'Петр', phone: '+7 (999) 444-55-66' },
