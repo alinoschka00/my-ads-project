@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Объявления</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ШАПКА САЙТА -->
+    <header>
+        <div class="container header-block">
+            <div class="logo">
+                <div class="logo-icon">📋</div> 
+                <span class="logo-text">Объявления</span>
+            </div>
+            <nav id="auth-nav">
+                <!-- Сюда JS будет вставлять кнопки Вход/Выход -->
+                <a href="#" onclick="login()">Регистрация</a>
+                <a href="#" onclick="login()">Вход</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Новые объявления</h1>
+            <!-- Ссылка ведет на страницу добавления -->
+            <a href="add.html" class="btn-add" style="text-decoration: none; display: inline-block;">+ Добавить объявление</a>
+        </div>
+
+        <!-- СЕТКА КАРТОЧЕК -->
+        <div class="cards-grid" id="cards-container">
+            <!-- Карточки будут генерироваться через JS для удобства пагинации -->
+        </div>
+
+        <!-- Кнопка "Показать еще" -->
+        <div class="load-more-container">
+            <button class="btn-load-more" id="load-more-btn" onclick="loadMoreCards()">Показать еще</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
