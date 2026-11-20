@@ -1,394 +1,256 @@
 
+/* ==============================
+   ОСНОВНЫЕ СТИЛИ
+============================== */
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #ffffff;
-    color: #333;
-    line-height: 1.5;
-}
-
-/* Контейнер для центрирования контента */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #222222;
 }
 
 a {
     text-decoration: none;
-    color: inherit;
 }
 
-/* =========================================
-   2. ШАПКА САЙТА (HEADER)
-   ========================================= */
-header {
-    padding: 20px 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 40px;
+/* ==============================
+   КОНТЕЙНЕР САЙТА
+============================== */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
 }
 
-.header-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* ==============================
+   ЗАГОЛОВКИ
+============================== */
+
+h1, h2, h3 {
+    margin-top: 0;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+h2 {
+    font-size: 21px;
+    font-weight: 700;
 }
 
-.logo-icon {
-    color: #ff2e63; /* Фирменный розовый */
-    font-size: 24px;
-}
-
-.logo-text {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-nav a {
-    font-size: 14px;
-    margin-left: 20px;
-    color: #333;
-    transition: color 0.2s;
-}
-
-nav a:hover {
-    color: #ff2e63;
-}
-
-/* =========================================
-   3. ЗАГОЛОВОК СТРАНИЦЫ И КНОПКА "ДОБАВИТЬ"
-   ========================================= */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.page-header h1 {
-    font-size: 32px;
-    font-weight: normal;
-}
+/* ==============================
+   КНОПКА ДОБАВЛЕНИЯ ОБЪЯВЛЕНИЯ
+============================== */
 
 .btn-add {
-    background-color: #ff2e63;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #e90082;
+    border-radius: 8px;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: 0.2s ease;
 }
 
 .btn-add:hover {
-    background-color: #e02656;
+    background-color: #c90070;
+    transform: scale(1.05);
 }
 
-/* =========================================
-   4. СЕТКА КАРТОЧЕК (ГЛАВНАЯ СТРАНИЦА)
-   ========================================= */
-.cards-grid {
+.plus-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==============================
+   ЗАГОЛОВОК С ОБЪЯВЛЕНИЯМИ
+============================== */
+
+.ads-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* ==============================
+   СЕТКА ОБЪЯВЛЕНИЙ
+============================== */
+
+.ads-container {
     display: grid;
-    /* Автоматически подстраивается под ширину экрана */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.card {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     width: 100%;
 }
 
-.card-link {
-    display: block;
-}
+/* ==============================
+   КАРТОЧКА ОБЪЯВЛЕНИЯ
+============================== */
 
-.card-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover; /* Картинка заполняет блок без искажений */
+.ad-card {
+    min-width: 0;
+    overflow: hidden;
+    background: #ffffff;
     border-radius: 10px;
+}
+
+.ad-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
     display: block;
-    margin-bottom: 12px;
-    background-color: #f0f0f0;
+    border-radius: 10px;
 }
 
-.card-title {
-    font-size: 15px;
-    font-weight: normal;
-    margin-bottom: 6px;
-    color: #333;
+.ad-card h3,
+.ad-card .ad-title {
+    font-size: 13px;
+    line-height: 1.35;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    word-break: break-word;
+    margin: 8px 0;
 }
 
-.card-price {
-    font-weight: bold;
-    font-size: 18px;
-    color: #333;
+.ad-card .price {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #222222;
 }
 
-/* =========================================
-   5. КНОПКА "ПОКАЗАТЬ ЕЩЕ"
-   ========================================= */
-.load-more-container {
+/* ==============================
+   КНОПКА ПОКАЗАТЬ ЕЩЁ
+============================== */
+
+.load-more {
+    width: 100%;
+    min-height: 48px;
     display: flex;
     justify-content: center;
-    margin: 40px 0 60px;
-}
-
-.btn-load-more {
-    background-color: transparent;
-    color: #ff2e63;
-    border: 2px solid #ff2e63;
-    padding: 14px 40px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
+    align-items: center;
+    margin-top: 20px;
+    background: white;
+    color: #e90082;
+    border: 2px solid #e90082;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
-    width: 100%;
-    max-width: 800px;
+    transition: 0.2s ease;
 }
 
-.btn-load-more:hover {
-    background-color: #fff0f5;
+.load-more:hover {
+    background-color: #fff0f7;
 }
 
-/* =========================================
-   6. ДЕТАЛЬНАЯ СТРАНИЦА (ITEM.HTML)
-   ========================================= */
-.item-page {
-    padding-top: 10px;
-    padding-bottom: 60px;
-}
+/* ==============================
+   НИЖНЯЯ ЧАСТЬ САЙТА
+============================== */
 
-.back-link {
-    display: inline-block;
-    color: #ff2e63;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.item-content {
+.site-footer {
     display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.item-image-block {
-    flex: 1;
-    max-width: 600px;
-}
-
-.item-main-img {
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    border-radius: 12px;
-    display: block;
+    padding: 35px 0 25px;
+    gap: 15px;
 }
 
-.item-info {
-    flex: 1;
-}
-
-.item-title {
-    font-size: 28px;
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.item-price {
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 25px;
-}
-
-.item-author {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-.item-author p {
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.auth-warning {
-    font-size: 13px !important;
-    color: #888;
-    font-style: italic;
-}
-
-.item-description {
-    margin-bottom: 30px;
-}
-
-.item-description h3 {
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.item-description p {
-    color: #555;
-    text-align: justify;
-}
-
-.btn-respond {
-    width: 100%;
-    background-color: #ff2e63;
-    color: white;
-    border: none;
-    padding: 16px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-respond:hover {
-    background-color: #e02656;
-}
-
-/* =========================================
-   7. СТРАНИЦА ДОБАВЛЕНИЯ (ADD.HTML)
-   ========================================= */
-.form-page {
-    padding-top: 10px;
-    padding-bottom: 60px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.form-title {
-    font-size: 32px;
-    margin-bottom: 30px;
-    font-weight: normal;
-}
-
-.add-form {
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #eee;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+.footer-email {
+    color: #e90082;
+    text-decoration: none;
     font-size: 14px;
-    color: #333;
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    font-family: inherit;
-    transition: border-color 0.2s;
+.footer-developer {
+    color: #999999;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: right;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #ff2e63;
+.footer-email:hover,
+.footer-developer:hover {
+    opacity: 0.7;
 }
 
-.form-group textarea {
-    resize: vertical;
+/* ==============================
+   ФОРМЫ
+============================== */
+
+input,
+textarea,
+select {
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
 }
 
-.form-group input[type="file"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: 1px dashed #ccc;
-    border-radius: 6px;
-    background: #fafafa;
-    cursor: pointer;
+button {
+    font-family: Arial, sans-serif;
 }
 
-.btn-submit {
-    width: 100%;
-    background-color: #ff2e63;
-    color: white;
-    border: none;
-    padding: 16px;
-    font-size: 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-    margin-top: 10px;
-}
+/* ==============================
+   ПЛАНШЕТЫ
+============================== */
 
-.btn-submit:hover {
-    background-color: #e02656;
-}
-
-/* =========================================
-   8. АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УСТРОЙСТВА)
-   ========================================= */
-@media (max-width: 768px) {
-    /* Главная страница */
-    .page-header {
-        flex-direction: column;
-        align-items: flex-start;
+@media (min-width: 600px) {
+    .ads-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 15px;
     }
-    
-    .btn-add {
-        width: 100%;
-    }
+}
 
-    .cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+/* ==============================
+   КОМПЬЮТЕРЫ
+============================== */
+
+@media (min-width: 900px) {
+    .ads-container {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 20px;
     }
+}
 
-    .card-img {
-        height: 140px;
-    }
+/* ==============================
+   МОБИЛЬНЫЕ УСТРОЙСТВА
+============================== */
 
-    /* Детальная страница */
-    .item-content {
-        flex-direction: column;
-    }
-    
-    .item-image-block {
-        max-width: 100%;
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
     }
 
-    /* Форма добавления */
-    .form-page {
-        padding: 0 10px 40px;
+    .ads-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
     }
-    
-    .add-form {
-        padding: 20px;
+
+    .site-footer {
+        padding: 30px 0 20px;
+    }
+
+    .footer-email,
+    .footer-developer {
+        font-size: 12px;
     }
 }
