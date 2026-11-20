@@ -1,59 +1,132 @@
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход</title>
+
+    <title>Вход в аккаунт — Объявления</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-    <div class="container header-block">
-        <a href="index.html" class="logo">
-            <span class="logo-icon">📋</span>
-            <span class="logo-text">Объявления</span>
-        </a>
-    </div>
-</header>
+    <!-- ШАПКА -->
+    <header class="site-header">
 
-<main class="container form-page">
-    <section class="form-card">
+        <div class="container header-block">
 
-        <h1 class="form-title">Вход в аккаунт</h1>
-        <p class="form-subtitle">Рады видеть вас снова!</p>
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📋</span>
+                <span class="logo-text">Объявления</span>
+            </a>
 
-        <form id="login-form" class="add-form">
+        </div>
 
-            <div class="form-group">
-                <label for="login-email">Email</label>
-                <input type="email" id="login-email"
-                       placeholder="example@mail.com" required>
-            </div>
+    </header>
 
-            <div class="form-group">
-                <label for="login-password">Пароль</label>
-                <input type="password" id="login-password"
-                       placeholder="Введите пароль" required>
-            </div>
 
-            <p id="login-error" class="auth-error"></p>
+    <!-- ФОРМА ВХОДА -->
+    <main class="container form-page">
 
-            <button type="submit" class="btn-submit">
-                Войти
-            </button>
+        <section class="form-card">
 
-        </form>
+            <h1 class="form-title">
+                Вход в аккаунт
+            </h1>
 
-        <p class="auth-switch">
-            Нет аккаунта?
-            <a href="register.html">Зарегистрироваться</a>
-        </p>
+            <p class="form-subtitle">
+                Рады видеть вас снова!
+            </p>
 
-    </section>
-</main>
 
-<script src="script.js"></script>
+            <form id="login-form" class="add-form">
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                    <label for="login-email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="login-email"
+                        name="email"
+                        placeholder="example@mail.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ПАРОЛЬ -->
+                <div class="form-group">
+
+                    <label for="login-password">
+                        Пароль
+                    </label>
+
+                    <input
+                        type="password"
+                        id="login-password"
+                        name="password"
+                        placeholder="Введите пароль"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ОШИБКА -->
+                <p
+                    id="login-error"
+                    class="auth-error"
+                    role="alert"
+                    aria-live="polite"
+                ></p>
+
+
+                <!-- КНОПКА -->
+                <button
+                    type="submit"
+                    class="btn-submit"
+                >
+                    Войти
+                </button>
+
+            </form>
+
+
+            <!-- РЕГИСТРАЦИЯ -->
+            <p class="auth-switch">
+
+                Нет аккаунта?
+
+                <a href="register.html">
+                    Зарегистрироваться
+                </a>
+
+            </p>
+
+
+            <!-- ВОЗВРАТ -->
+            <a href="index.html" class="back-link">
+                ← Вернуться к объявлениям
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
 </body>
+
 </html>
