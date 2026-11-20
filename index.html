@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,42 +7,80 @@
     <title>Объявления</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- ШАПКА САЙТА -->
-    <header>
+    <!-- ШАПКА -->
+    <header class="site-header">
         <div class="container header-block">
-            <div class="logo">
-                <div class="logo-icon">📋</div> 
+
+            <a href="index.html" class="logo">
+                <div class="logo-icon">📋</div>
                 <span class="logo-text">Объявления</span>
-            </div>
+            </a>
+
             <nav id="auth-nav">
-                <!-- Сюда JS будет вставлять кнопки Вход/Выход -->
                 <a href="#" onclick="login()">Регистрация</a>
                 <a href="#" onclick="login()">Вход</a>
             </nav>
+
         </div>
     </header>
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="container">
-        <div class="page-header">
+
+        <section class="page-header">
+
             <h1>Новые объявления</h1>
-            <!-- Ссылка ведет на страницу добавления -->
-            <a href="add.html" class="btn-add" style="text-decoration: none; display: inline-block;">+ Добавить объявление</a>
-        </div>
 
-        <!-- СЕТКА КАРТОЧЕК -->
-        <div class="cards-grid" id="cards-container">
-            <!-- Карточки будут генерироваться через JS для удобства пагинации -->
-        </div>
+            <!-- КНОПКА ДОБАВЛЕНИЯ -->
+           
+<a href="add.html" class="btn-add">
+    <img src="img/+.png" alt="+" class="add-icon">
+    <span>Добавить объявление</span>
+</a>
 
-        <!-- Кнопка "Показать еще" -->
+        </section>
+
+        <!-- КАРТОЧКИ ОБЪЯВЛЕНИЙ -->
+        <section
+            class="cards-grid"
+            id="cards-container"
+            aria-label="Список объявлений">
+
+        </section>
+
+        <!-- ПОКАЗАТЬ ЕЩЁ -->
         <div class="load-more-container">
-            <button class="btn-load-more" id="load-more-btn" onclick="loadMoreCards()">Показать еще</button>
+
+            <button
+                class="btn-load-more"
+                id="load-more-btn"
+                onclick="loadMoreCards()">
+
+                Показать еще
+
+            </button>
+
         </div>
+
     </main>
 
+    <!-- ПОДВАЛ -->
+    <footer class="site-footer container">
+
+        <a href="mailto:info@gmail.com">
+            info@gmail.com
+        </a>
+
+        <a href="developer.html">
+            Информация о разработчике
+        </a>
+
+    </footer>
+
     <script src="script.js"></script>
+
 </body>
 </html>
