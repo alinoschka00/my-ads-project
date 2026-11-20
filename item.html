@@ -1,29 +1,66 @@
+
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Объявление</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- ШАПКА САЙТА -->
-    <header>
+    <header class="site-header">
+
         <div class="container header-block">
-            <div class="logo">
-                <div class="logo-icon">📋</div> 
+
+            <a href="index.html" class="logo">
+                <div class="logo-icon">📋</div>
                 <span class="logo-text">Объявления</span>
-            </div>
+            </a>
+
             <nav id="auth-nav"></nav>
+
         </div>
+
     </header>
 
-    <!-- КОНТЕЙНЕР ДЛЯ ДЕТАЛЬНОЙ СТРАНИЦЫ -->
-    <main class="container item-page" id="item-detail-page">
-        <!-- Сюда JS вставит всё содержимое -->
+
+    <!-- ДЕТАЛЬНАЯ СТРАНИЦА ОБЪЯВЛЕНИЯ -->
+    <main
+        class="container item-page"
+        id="item-detail-page"
+        aria-live="polite"
+    >
+
+        <!-- JavaScript загрузит информацию об объявлении -->
+
+        <p>Загрузка объявления...</p>
+
     </main>
 
+
+    <!-- ПОДВАЛ -->
+    <footer class="site-footer container">
+
+        <a href="mailto:info@gmail.com" class="footer-email">
+            info@gmail.com
+        </a>
+
+        <a href="developer.html" class="footer-developer">
+            Информация о разработчике
+        </a>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
     <script src="script.js"></script>
+
 </body>
+
 </html>
