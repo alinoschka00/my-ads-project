@@ -1,10 +1,13 @@
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Объявления</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,6 +15,7 @@
 
     <!-- ШАПКА -->
     <header class="site-header">
+
         <div class="container header-block">
 
             <a href="index.html" class="logo">
@@ -20,12 +24,14 @@
             </a>
 
             <nav id="auth-nav">
-                <a href="#" onclick="login()">Регистрация</a>
-                <a href="#" onclick="login()">Вход</a>
+                <a href="#" onclick="login(); return false;">Регистрация</a>
+                <a href="#" onclick="login(); return false;">Вход</a>
             </nav>
 
         </div>
+
     </header>
+
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="container">
@@ -35,52 +41,66 @@
             <h1>Новые объявления</h1>
 
             <!-- КНОПКА ДОБАВЛЕНИЯ -->
-           
-<a href="add.html" class="btn-add">
-    <img src="img/+.png" alt="+" class="add-icon">
-    <span>Добавить объявление</span>
-</a>
+            <a href="add.html" class="btn-add">
+
+                <img
+                    src="img/+.png"
+                    alt=""
+                    class="add-icon"
+                >
+
+                <span>Добавить объявление</span>
+
+            </a>
 
         </section>
+
 
         <!-- КАРТОЧКИ ОБЪЯВЛЕНИЙ -->
         <section
             class="cards-grid"
             id="cards-container"
-            aria-label="Список объявлений">
+            aria-label="Список объявлений"
+            aria-live="polite"
+        >
 
         </section>
+
 
         <!-- ПОКАЗАТЬ ЕЩЁ -->
         <div class="load-more-container">
 
             <button
+                type="button"
                 class="btn-load-more"
                 id="load-more-btn"
-                onclick="loadMoreCards()">
-
+                onclick="loadMoreCards()"
+            >
                 Показать еще
-
             </button>
 
         </div>
 
     </main>
 
+
     <!-- ПОДВАЛ -->
     <footer class="site-footer container">
 
-        <a href="mailto:info@gmail.com">
+        <a href="mailto:info@gmail.com" class="footer-email">
             info@gmail.com
         </a>
 
-        <a href="developer.html">
+        <a href="developer.html" class="footer-developer">
             Информация о разработчике
         </a>
 
     </footer>
 
+
+    <!-- JAVASCRIPT -->
     <script src="script.js"></script>
 
 </body>
+
 </html>
