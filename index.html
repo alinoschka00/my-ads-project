@@ -1,106 +1,585 @@
-
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доска объявлений</title>
+    <style>
+        /* --- Общие стили --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif; /* Максимально похожий шрифт */
+        }
 
-    <title>Объявления</title>
+        body {
+            background-color: #ffffff;
+            color: #333;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- Шапка --- */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff2d75; /* Фирменный розовый */
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background: #ff2d75;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .nav-links span {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-links span:hover { color: #ff2d75; }
+
+        /* --- Заголовок и кнопка --- */
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0 20px;
+        }
+
+        .main-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background-color: #ff2d75;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e02060;
+        }
+
+        /* --- Сетка товаров --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            padding-top: 100%; /* Квадратное соотношение сторон */
+            position: relative;
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .card-img-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Чтобы картинки не искажались */
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-price {
+            font-weight: bold;
+            font-size: 16px;
+            color: #222;
+            margin-bottom: 4px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: #999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* --- Кнопка показать еще --- */
+        .show-more-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ff2d75;
+            color: #ff2d75;
+            padding: 12px 100px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: #ff2d75;
+            color: white;
+        }
+
+        /* --- Футер --- */
+        footer {
+            border-top: 1px solid #eee;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #999;
+        }
+        .footer-email { color: #ff2d75; font-weight: bold; }
+
+        /* --- МОДАЛЬНОЕ ОКНО (Регистрация/Авторизация) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: none; /* Скрыто по умолчанию */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #ccc;
+            cursor: pointer;
+        }
+
+        /* Заголовки вкладок */
+        .auth-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #ccc;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .tab-btn.active {
+            color: #222;
+        }
+
+        /* Формы */
+        .form-content { display: none; }
+        .form-content.active { display: block; }
+
+        .input-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 25px 15px 10px;
+            border: 2px solid #ff2d75;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            background: white;
+            color: #333;
+        }
+
+        /* Плейсхолдеры сверху (как на дизайне) */
+        .input-group label {
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            font-size: 10px;
+            color: #999;
+            pointer-events: none;
+        }
+
+        /* Чекбокс */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff2d75;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            background: white;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked {
+            background: #ff2d75;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked::after {
+            content: '✔';
+            color: white;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+
+        .checkbox-group a {
+            color: #ff2d75;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: #ff2d75;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .modal-footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Иконка "i" */
+        .info-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #999;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+    </style>
 </head>
-
 <body>
 
-    <!-- ШАПКА -->
-    <header class="site-header">
+    <div class="container">
+        <!-- Шапка -->
+        <header>
+            <div class="logo">
+                <div class="logo-icon">O</div>
+                Объявления
+            </div>
+            <div class="nav-links">
+                <span>Зарегистрироваться</span>
+                <span>Контакты</span>
+                <span>Выход</span>
+            </div>
+        </header>
 
-        <div class="container header-block">
-
-            <a href="index.html" class="logo">
-                <div class="logo-icon">📋</div>
-                <span class="logo-text">Объявления</span>
-            </a>
-
-            <nav id="auth-nav">
-                <a href="#" onclick="login(); return false;">Регистрация</a>
-                <a href="#" onclick="login(); return false;">Вход</a>
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
-    <main class="container">
-
-        <section class="page-header">
-
+        <!-- Заголовок -->
+        <div class="main-header">
             <h1>Новые объявления</h1>
-
-            <!-- КНОПКА ДОБАВЛЕНИЯ -->
-            <a href="add.html" class="btn-add">
-
-                <img
-                    src="img/+.png"
-                    alt=""
-                    class="add-icon"
-                >
-
-                <span>Добавить объявление</span>
-
-            </a>
-
-        </section>
-
-
-        <!-- КАРТОЧКИ ОБЪЯВЛЕНИЙ -->
-        <section
-            class="cards-grid"
-            id="cards-container"
-            aria-label="Список объявлений"
-            aria-live="polite"
-        >
-
-        </section>
-
-
-        <!-- ПОКАЗАТЬ ЕЩЁ -->
-        <div class="load-more-container">
-
-            <button
-                type="button"
-                class="btn-load-more"
-                id="load-more-btn"
-                onclick="loadMoreCards()"
-            >
-                Показать еще
-            </button>
-
+            <!-- Кнопка вызывает модальное окно -->
+            <button class="btn-primary" onclick="openModal()">+ Зарегистрироваться</button>
         </div>
 
-    </main>
+        <!-- Сетка товаров -->
+        <div class="grid">
+            <!-- Товар 1 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="dragon_passport.jpg" alt="Чехол"></div>
+                <div class="card-title">3 580 ₽</div>
+                <div class="card-price">Кожаный чехол с глазом</div>
+                <div class="card-desc">Дракон</div>
+            </div>
+            <!-- Товар 2 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="black_hoodie.jpg" alt="Худи"></div>
+                <div class="card-title">4 900 ₽</div>
+                <div class="card-price">Черное худи</div>
+                <div class="card-desc">Распашонка</div>
+            </div>
+            <!-- Товар 3 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="leather_keychain.jpg" alt="Брелок"></div>
+                <div class="card-title">12 000 ₽</div>
+                <div class="card-price">Кожаный брелок</div>
+                <div class="card-desc">Ручная работа</div>
+            </div>
+            <!-- Товар 4 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="iphone_blue.jpg" alt="Айфон"></div>
+                <div class="card-title">79 990 ₽</div>
+                <div class="card-price">Айфон (синий)</div>
+                <div class="card-desc">iPhone 13</div>
+            </div>
+            <!-- Товар 5 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="tv_stand.jpg" alt="Тумба"></div>
+                <div class="card-title">67 850 ₽</div>
+                <div class="card-price">ТВ-тумба</div>
+                <div class="card-desc">Дерево, лофт</div>
+            </div>
+            <!-- Товар 6 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="candles.jpg" alt="Свечи"></div>
+                <div class="card-title">620 ₽</div>
+                <div class="card-price">Свечи</div>
+                <div class="card-desc">Paccana</div>
+            </div>
+            <!-- Товар 7 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="watch_pobeda.jpg" alt="Часы"></div>
+                <div class="card-title">7 990 ₽</div>
+                <div class="card-price">Часы Победа</div>
+                <div class="card-desc">Винтаж</div>
+            </div>
+            <!-- Товар 8 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="sushi.jpg" alt="Роллы"></div>
+                <div class="card-title">1 580 ₽</div>
+                <div class="card-price">Роллы Филадельфия</div>
+                <div class="card-desc">Набор</div>
+            </div>
+            <!-- Товар 9 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="tshirt_logo.jpg" alt="Футболка"></div>
+                <div class="card-title">1 500 ₽</div>
+                <div class="card-price">Черная футболка</div>
+                <div class="card-desc">С логотипом</div>
+            </div>
+            <!-- Товар 10 -->
+            <div class="card">
+                <div class="card-img-wrapper"><img src="wooden_bird.jpg" alt="Птичка"></div>
+                <div class="card-title">700 ₽</div>
+                <div class="card-price">Деревянная птичка</div>
+                <div class="card-desc">Декор</div>
+            </div>
+        </div>
 
+        <!-- Показать еще -->
+        <div class="show-more-container">
+            <button class="btn-outline">Показать еще</button>
+        </div>
 
-    <!-- ПОДВАЛ -->
-    <footer class="site-footer container">
+        <!-- Футер -->
+        <footer>
+            <div class="footer-email">info@gmail.com</div>
+            <div>Пользовательское соглашение</div>
+        </footer>
+    </div>
 
-        <a href="mailto:info@gmail.com" class="footer-email">
-            info@gmail.com
-        </a>
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('register')" id="tab-register">Регистрация</button>
+                <button class="tab-btn" onclick="switchTab('login')" id="tab-login">Авторизация</button>
+            </div>
 
-        <a href="developer.html" class="footer-developer">
-            Информация о разработчике
-        </a>
+            <!-- Форма регистрации -->
+            <div class="form-content active" id="form-register">
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label>Ваше имя</label>
+                    <input type="text" value="Константин">
+                </div>
+                
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" value="info@gmail.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Мобильный телефон</label>
+                        <input type="tel" value="8 910 123 34 45">
+                    </div>
+                </div>
 
-    </footer>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Пароль</label>
+                        <input type="password" value="********">
+                    </div>
+                    <div class="input-group">
+                        <label>Повторите пароль</label>
+                        <input type="password" value="********">
+                    </div>
+                </div>
 
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agree" checked>
+                    <label for="agree">Согласен на обработку <a href="#">персональных данных</a></label>
+                </div>
 
-    <!-- JAVASCRIPT -->
-    <script src="script.js"></script>
+                <button class="btn-submit">Зарегистрироваться</button>
 
+                <div class="modal-footer-note">
+                    <div class="info-icon">i</div>
+                    Все поля обязательны для заполнения
+                </div>
+            </div>
+
+            <!-- Форма авторизации (скрыта по умолчанию) -->
+            <div class="form-content" id="form-login">
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label>Email</label>
+                    <input type="email" placeholder="Введите ваш email">
+                </div>
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label>Пароль</label>
+                    <input type="password" placeholder="Введите пароль">
+                </div>
+                <button class="btn-submit">Войти</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Скрипты для работы окна -->
+    <script>
+        const modal = document.getElementById('authModal');
+        const tabRegister = document.getElementById('tab-register');
+        const tabLogin = document.getElementById('tab-login');
+        const formRegister = document.getElementById('form-register');
+        const formLogin = document.getElementById('form-login');
+
+        // Открыть модальное окно
+        function openModal() {
+            modal.classList.add('active');
+        }
+
+        // Закрыть модальное окно
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // Переключение вкладок
+        function switchTab(type) {
+            if (type === 'register') {
+                tabRegister.classList.add('active');
+                tabLogin.classList.remove('active');
+                formRegister.classList.add('active');
+                formLogin.classList.remove('active');
+            } else {
+                tabLogin.classList.add('active');
+                tabRegister.classList.remove('active');
+                formLogin.classList.add('active');
+                formRegister.classList.remove('active');
+            }
+        }
+
+        // Закрытие по клику вне окна
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
-
 </html>
